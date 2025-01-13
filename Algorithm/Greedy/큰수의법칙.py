@@ -27,19 +27,29 @@
 # 46
 
 
-def bignumber():
-    answer = 0
-    _, m, k = map(int, input().split())
-    numbers = list(map(int, input().split()))
-    numbers.sort()
+answer = 0
+first = 0
+second = 0
+_, m, k = map(int, input().split())
+numbers = list(map(int, input().split()))
+numbers.sort()
 
-    if m // k > 0:
-        answer += numbers[-1] * k * (m // k)
-        answer += numbers[-2] * (m % k)
+
+def calculate_count():
+    global m, first, second
+    if m - (k + 1) >= 0:
+        first += 1 * k
+        second += 1
+        m = m - k - 1
+        if m != 0:
+            calculate_count()
     else:
-        answer += numbers[-1] * m
+        first += m
+        return
 
-    return answer
 
+calculate_count()
 
-print(bignumber())
+answer += numbers[-1] * first
+answer += numbers[-2] * second
+print(answer)
