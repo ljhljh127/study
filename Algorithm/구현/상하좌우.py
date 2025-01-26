@@ -56,13 +56,9 @@ def udlr():
 
 
 def check_valid(type,target,n):
-    if type == "L":
+    if type in ["L","U"]:
         return target -1 >=1
-    if type == "U":
-        return target -1 >=1
-    if type =="R":
-        return target +1 <=n
-    if type =="D":
+    if type in ["R","D"]:
         return target +1 <=n
 
 print(udlr())
