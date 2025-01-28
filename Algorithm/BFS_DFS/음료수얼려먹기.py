@@ -91,6 +91,7 @@ def calculate_icecream(_graph, _n, _m):
                 while queue:
                     obj = queue.popleft()
                     for adjn in obj:
+                        # adjn은 인접노드 정보를 기록 [0]은 x 좌표 [1]은 y좌표
                         if _graph[adjn[0]][adjn[1]][1] is not True:
                             _graph[adjn[0]][adjn[1]][1] = True
                             queue.append(_graph[adjn[0]][adjn[1]][0])
