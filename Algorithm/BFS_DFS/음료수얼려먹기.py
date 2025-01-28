@@ -22,6 +22,7 @@ N x M 크기의 얼음틀이 있다. 구멍이 뚫려있는 부분은 0, 칸막�
 탐색을 시작하게 되는 횟수가 아이스크림의 개수 일 것이다.
 """
 from collections import deque
+import copy
 
 def frozen_drink():
     n,m=map(int,input().split())
@@ -36,11 +37,13 @@ def frozen_drink():
 
     # 그래프 화
     graph = make_graph(ice_tray, n, m)
+    graph2 = copy.deepcopy(graph)
 
     # 아이스크림 개수 구하기
-    print(calculate_icecream(graph, n, m))
-
-    
+    print("DFS로 풀이")
+    print(calculate_icecream_dfs(graph, n, m))
+    print("BFS로 풀이")
+    print(calculate_icecream(graph2, n, m))
 
 
 
@@ -72,7 +75,7 @@ def make_graph(_ice_tray, _n, _m):
             _ice_tray[i][j] = node
     return _ice_tray
 
-
+# BFS
 def calculate_icecream(_graph, _n, _m):
     icecream_cnt = 0
     # graph[i][j][0] == 인접노드 정보
@@ -91,6 +94,27 @@ def calculate_icecream(_graph, _n, _m):
                         if _graph[adjn[0]][adjn[1]][1] is not True:
                             _graph[adjn[0]][adjn[1]][1] = True
                             queue.append(_graph[adjn[0]][adjn[1]][0])
+    return icecream_cnt
+
+# DFS
+def calculate_icecream_dfs(_graph, _n, _m):
+    icecream_cnt = 0
+    # graph[i][j][0] == 인접노드 정보
+    # graph[i][j][1] == 방문여부
+    for i in range (_n):
+        for j in range (_m):
+            current_node = _graph[i][j]
+            icecream_cnt = dfs(current_node, _graph, icecream_cnt )
+    return icecream_cnt
+            
+
+def dfs(current_node, _graph, icecream_cnt):
+    if current_node[1] is not True:
+        icecream_cnt+=1
+        current_node[1] = True
+        for adjn in current_node[0]:
+            if _graph[adjn[0]][adjn[1]][1] is not True:
+                dfs(_graph[adjn[0]][adjn[1]], _graph, icecream_cnt)
     return icecream_cnt
                         
 
