@@ -6,6 +6,8 @@ def uptodown():
         array.append(int(input()))
 
     array.sort(reverse=True)
-    return array
 
-print(uptodown())
+    for i in array:
+        print(i,end =' ')
+
+uptodown()
