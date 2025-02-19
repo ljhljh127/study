@@ -27,17 +27,46 @@
 15
 """
 
-"""
-접근 방식
-절단기의 최대값 이므로 리스트 정렬 후 마지막 가장 긴 떡의 길이부터 시작
-처음 생각: 만약 자른 떡의 길이가 모자라면 그 다음 긴 떡으로 이동해서 자르기
-이렇게하면 최악의 경우 다 돌아야함 비효율
-답지 참고
-이진탐색 이용해서 
-"""
-
 import sys
+import time
+
+
 def tteokpoki():
 
-    n, m = map(int,(sys.stdin.readline().rstrip().split()))
-    tteok_list = list(map(int,(sys.stdin.readline().rstrip().split())))
+    n, m = map(int, sys.stdin.readline().rstrip().split())
+    tteok_list = list(map(int, (sys.stdin.readline().rstrip().split())))
+    tteok_list.sort()
+    return binary_search(0, tteok_list[-1], tteok_list, m)
+
+
+def binary_search(start, end, array, target):
+    answer = -1
+    while True:
+        mid = (start + end) // 2
+        result = is_bigger_than_target(array, target, mid)
+        if result:
+            start = mid + 1
+            if mid > answer:
+                answer = mid
+        else:
+            end = mid - 1
+
+        # for debuging
+        print(start, end, mid)
+        if start > end:
+            break
+    return answer
+
+
+def is_bigger_than_target(_array, _target, _mid):
+    result = 0
+    for i in _array:
+        if i - _mid > 0:
+            result += i - _mid
+    if result >= _target:
+        return True
+    else:
+        return False
+
+
+print(tteokpoki())
