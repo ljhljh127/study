@@ -46,6 +46,8 @@ def binary_search(start, end, array, target):
         result = is_bigger_than_target(array, target, mid)
         if result:
             start = mid + 1
+
+            print("미드", mid)
             if mid > answer:
                 answer = mid
         else:
@@ -69,4 +71,4 @@ def is_bigger_than_target(_array, _target, _mid):
         return False
 
 
-print(tteokpoki())
+print(f"정답:{tteokpoki()}")

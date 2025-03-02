@@ -27,6 +27,8 @@ for _ in range(m):
     a, b, c = map(int, sys.stdin.readline().rstrip().split())
     graph[a].append((b, c))
 
+print(graph)
+
 
 def djikstra(start):
     queue = []
