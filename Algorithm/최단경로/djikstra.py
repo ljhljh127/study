@@ -29,7 +29,7 @@ for _ in range(m):
     graph[a].append((b, c))
 
 
-# 다익스라 알고리즘 적용
+# 다익스트라 알고리즘 적용
 def dijkstra(start):
     distance[start] = 0
     visited[start] = True
@@ -58,5 +58,6 @@ def get_smallest_node():
     return index
 
 
+# 일반적인 방식
 dijkstra(1)
 print(distance)
