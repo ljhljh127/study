@@ -42,6 +42,8 @@
 8
 """
 
+import sys
+
 
 def find_parent(parent, x):
     if parent[x] != x:
@@ -59,7 +61,8 @@ def union_parent(parent, a, b):
 
 
 # 입력
-n, m = map(int, input().split())
+
+n, m = map(int, sys.stdin.readline().split())
 parent = [0] * (n + 1)
 for i in range(n + 1):
     parent[i] = i
@@ -69,7 +72,7 @@ result = 0
 max_cost = 0
 
 for i in range(m):
-    a, b, c = map(int, input().split())
+    a, b, c = map(int, sys.stdin.readline().split())
     edges.append((c, a, b))
 
 edges.sort()
